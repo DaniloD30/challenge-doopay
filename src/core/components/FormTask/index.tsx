@@ -22,7 +22,7 @@ export default function FormTask() {
 				<div className="flex gap-5">
 					<input
 						placeholder="Nome"
-						className="border-l-lime-950 w-40"
+						className="border-solid border-2 border-sky-500 w-40 rounded-lg p-2"
 						onChange={e => handleAdd(e.target.value)}></input>
 					<button
 						disabled={task.name === ''}
