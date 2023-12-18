@@ -10,7 +10,7 @@ export default function CardContainer() {
 		<div className="flex gap-6 w-[80%] flex-wrap p-5">
 			{tasks.map((item, index) => (
 				<Card
-					key={`${index}-${item.name}`}
+					key={index}
 					isPending={item.isPending}
 					title={item.name}
 					indexCard={index}
