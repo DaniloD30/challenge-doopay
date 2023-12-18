@@ -6,12 +6,15 @@ import React, {
 	useCallback,
 	useState,
 	useContext,
+	useEffect,
 } from 'react';
-import { Task } from '../interfaces/TaskInterfaces';
+import { PercentValues, Task } from '../interfaces/TaskInterfaces';
 
 interface ListContextProps {
 	handleAddTask: (task: Task) => void;
 	handleChangeStatus: (indexTask: number) => void;
+	handlePercent: () => void;
+	percentValues: PercentValues;
 	tasks: Task[];
 }
 
@@ -23,6 +26,10 @@ export const ListContext = createContext({} as ListContextProps);
 
 export function ListProvider({ children }: ProviderProps) {
 	const [tasks, setTasks] = useState<Task[]>([]);
+	const [percentValues, setPercent] = useState<PercentValues>({
+		done: 0,
+		pending: 0,
+	});
 
 	const handleAddTask = useCallback((task: Task) => {
 		setTasks(prev => [...prev, task]);
@@ -37,8 +44,30 @@ export function ListProvider({ children }: ProviderProps) {
 		[tasks],
 	);
 
+	const handlePercent = useCallback(() => {
+		if (tasks.length > 0) {
+			const newArrPending = tasks.filter(a => a.isPending);
+			const newArrDone = tasks.filter(a => !a.isPending);
+			setPercent({
+				pending: (newArrPending.length / tasks.length) * 100,
+				done: (newArrDone.length / tasks.length) * 100,
+			});
+		}
+	}, [tasks]);
+
+	useEffect(() => {
+		handlePercent();
+	}, [tasks, handlePercent]);
+
 	return (
-		<ListContext.Provider value={{ handleAddTask, handleChangeStatus, tasks }}>
+		<ListContext.Provider
+			value={{
+				handlePercent,
+				percentValues,
+				handleAddTask,
+				handleChangeStatus,
+				tasks,
+			}}>
 			{children}
 		</ListContext.Provider>
 	);

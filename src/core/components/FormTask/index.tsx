@@ -10,24 +10,28 @@ export default function FormTask() {
 		isPending: true,
 	});
 	const { handleAddTask } = useListContext();
+
 	const handleAdd = useCallback((e: string) => {
 		setTask(prev => ({ ...prev, name: e }));
 	}, []);
 
 	return (
-		<div className="flex flex-col p-4">
-			<h1 className="text-xl">Adicione uma tarefa</h1>
-			<div className="flex gap-5">
-				<input
-					placeholder="Nome"
-					className="border-l-lime-950 w-40"
-					onChange={e => handleAdd(e.target.value)}></input>
-				<button
-					onClick={() => handleAddTask(task)}
-					className="bg-slate-700 text-cyan-50 rounded-md h-12 w-24 hover:bg-slate-950">
-					Adicionar
-				</button>
+		<>
+			<div className="flex flex-col p-4">
+				<h1 className="text-xl">Adicione uma tarefa</h1>
+				<div className="flex gap-5">
+					<input
+						placeholder="Nome"
+						className="border-l-lime-950 w-40"
+						onChange={e => handleAdd(e.target.value)}></input>
+					<button
+						disabled={task.name === ''}
+						onClick={() => handleAddTask(task)}
+						className="bg-slate-700 text-cyan-50 rounded-md h-12 w-24 hover:bg-slate-950 disabled:cursor-not-allowed">
+						Adicionar
+					</button>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
