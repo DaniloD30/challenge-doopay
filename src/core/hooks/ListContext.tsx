@@ -25,7 +25,20 @@ interface ProviderProps {
 export const ListContext = createContext({} as ListContextProps);
 
 export function ListProvider({ children }: ProviderProps) {
-	const [tasks, setTasks] = useState<Task[]>([]);
+	const initialTasks = () => {
+		const getStorageTasks = localStorage.getItem('tasks');
+		if (getStorageTasks !== null) {
+			try {
+				const tasksStorage = JSON.parse(getStorageTasks);
+				return tasksStorage;
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		return [];
+	};
+	const [tasks, setTasks] = useState<Task[]>(initialTasks);
 	const [percentValues, setPercent] = useState<PercentValues>({
 		done: 0,
 		pending: 0,
@@ -57,6 +70,7 @@ export function ListProvider({ children }: ProviderProps) {
 
 	useEffect(() => {
 		handlePercent();
+		localStorage.setItem('tasks', JSON.stringify(tasks));
 	}, [tasks, handlePercent]);
 
 	return (
