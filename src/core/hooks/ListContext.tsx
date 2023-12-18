@@ -6,12 +6,12 @@ import React, {
 	useCallback,
 	useState,
 	useContext,
-	useEffect,
 } from 'react';
 import { Task } from '../interfaces/TaskInterfaces';
 
 interface ListContextProps {
 	handleAddTask: (task: Task) => void;
+	tasks: Task[];
 }
 
 interface ProviderProps {
@@ -28,7 +28,7 @@ export function ListProvider({ children }: ProviderProps) {
 	}, []);
 
 	return (
-		<ListContext.Provider value={{ handleAddTask }}>
+		<ListContext.Provider value={{ handleAddTask, tasks }}>
 			{children}
 		</ListContext.Provider>
 	);
