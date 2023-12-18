@@ -11,6 +11,7 @@ import { Task } from '../interfaces/TaskInterfaces';
 
 interface ListContextProps {
 	handleAddTask: (task: Task) => void;
+	handleChangeStatus: (indexTask: number) => void;
 	tasks: Task[];
 }
 
@@ -27,8 +28,17 @@ export function ListProvider({ children }: ProviderProps) {
 		setTasks(prev => [...prev, task]);
 	}, []);
 
+	const handleChangeStatus = useCallback(
+		(indexTask: number) => {
+			const newArr = [...tasks];
+			newArr[indexTask].isPending = !newArr[indexTask].isPending;
+			setTasks(newArr);
+		},
+		[tasks],
+	);
+
 	return (
-		<ListContext.Provider value={{ handleAddTask, tasks }}>
+		<ListContext.Provider value={{ handleAddTask, handleChangeStatus, tasks }}>
 			{children}
 		</ListContext.Provider>
 	);

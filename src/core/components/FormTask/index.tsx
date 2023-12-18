@@ -7,7 +7,7 @@ import React, { useCallback, useState } from 'react';
 export default function FormTask() {
 	const [task, setTask] = useState<Task>({
 		name: '',
-		isPending: false,
+		isPending: true,
 	});
 	const { handleAddTask } = useListContext();
 	const handleAdd = useCallback((e: string) => {

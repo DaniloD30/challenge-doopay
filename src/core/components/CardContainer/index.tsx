@@ -11,6 +11,7 @@ export default function CardContainer() {
 			{tasks.map((item, index) => (
 				<Card
 					key={`${index}-${item.name}`}
+					isPending={item.isPending}
 					title={item.name}
 					indexCard={index}
 				/>
