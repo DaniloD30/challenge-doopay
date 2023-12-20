@@ -1,5 +1,5 @@
 import { useListContext } from '@/core/hooks/ListContext';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 interface Props {
 	title: string;
@@ -8,19 +8,24 @@ interface Props {
 }
 export default function Card({ title, isPending, indexCard }: Props) {
 	const { handleChangeStatus } = useListContext();
-	const status = useMemo(() => (isPending ? 'Pending' : 'Done'), [isPending]);
 	return (
-		<div className="flex flex-col w-56 h-56 bg-slate-600 p-2">
-			<h1 className="text-white text-lg">{title}</h1>
-			<div className=" flex items-center justify-center h-24">
+		<div className="flex items-center justify-between h-3 border-2 rounded-lg p-7 w-[630px]">
+			<h1 className="text-black text-lg text-ellipsis overflow-hidden ">
+				{title}
+			</h1>
+			{isPending ? (
 				<button
 					onClick={() => handleChangeStatus(indexCard)}
-					className="bg-slate-500 
-                text-cyan-50 rounded-md h-12 w-24 
-                hover:bg-slate-950">
-					{status}
+					className="bg-green-600
+				text-sm
+				font-semibold
+                text-white rounded-md
+				p-2
+				h-10
+                hover:bg-green-900">
+					COMPLETAR
 				</button>
-			</div>
+			) : null}
 		</div>
 	);
 }

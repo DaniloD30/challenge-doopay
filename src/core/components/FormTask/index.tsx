@@ -17,20 +17,24 @@ export default function FormTask() {
 
 	return (
 		<>
-			<div className="flex flex-col p-4">
-				<h1 className="text-xl">Adicione uma tarefa</h1>
-				<div className="flex gap-5">
-					<input
-						placeholder="Nome"
-						className="border-solid border-2 border-sky-500 w-40 rounded-lg p-2"
-						onChange={e => handleAdd(e.target.value)}></input>
-					<button
-						disabled={task.name === ''}
-						onClick={() => handleAddTask(task)}
-						className="bg-slate-700 text-cyan-50 rounded-md h-12 w-24 hover:bg-slate-950 disabled:cursor-not-allowed">
-						Adicionar
-					</button>
-				</div>
+			<div className="flex items-center justify-center gap-5 mt-14">
+				<input
+					placeholder="Escreva uma nova tarefa"
+					className="border-solid border-2 border-gray-200 rounded-lg p-2 w-96"
+					onChange={e => handleAdd(e.target.value)}
+				/>
+
+				<button
+					disabled={task.name === ''}
+					onClick={() => handleAddTask(task)}
+					className="bg-indigo-600
+					p-3 w-56
+					text-sm
+					font-semibold
+					text-white rounded-md
+					hover:bg-indigo-800 disabled:cursor-not-allowed">
+					ADICIONAR
+				</button>
 			</div>
 		</>
 	);

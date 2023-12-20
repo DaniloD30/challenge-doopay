@@ -70,7 +70,6 @@ export function ListProvider({ children }: ProviderProps) {
 	}, [tasks]);
 
 	useEffect(() => {
-		console.log({ tasks });
 		handlePercent();
 		localStorage.setItem('tasks', JSON.stringify(tasks));
 	}, [tasks, handlePercent]);

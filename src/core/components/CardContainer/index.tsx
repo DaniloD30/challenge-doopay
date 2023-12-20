@@ -7,7 +7,7 @@ import Card from '../CardTask';
 export default function CardContainer() {
 	const { tasks } = useListContext();
 	return (
-		<div className="flex gap-6 w-[80%] flex-wrap p-5">
+		<div className="flex flex-col items-center justify-center gap-10 p-5 mt-6">
 			{tasks.map((item, index) => (
 				<Card
 					key={index}

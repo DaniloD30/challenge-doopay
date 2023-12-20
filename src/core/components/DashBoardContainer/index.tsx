@@ -19,17 +19,21 @@ export default function DashBoardContainer() {
 		[percentValues],
 	);
 	return (
-		<div className="flex gap-6 p-4">
-			<CardDashboard color="" text="Tarefas Adicionadas:" length={tasks.length} />
+		<div className="flex flex-wrap items-center justify-center mt-16 gap-24">
 			<CardDashboard
-				color={colorPending}
-				text="Tarefas Pendentes:"
-				length={tasks.filter(a => a.isPending).length}
+				color="text-gray-400"
+				text="Total de Tarefas"
+				length={tasks.length}
 			/>
 			<CardDashboard
 				color={colorDone}
-				text="Tarefas Concluídas:"
-				length={tasks.filter(a => !a.isPending).length}
+				text="Concluídas"
+				length={+percentValues.done.toFixed(1)}
+			/>
+			<CardDashboard
+				color={colorPending}
+				text="Pendentes"
+				length={+percentValues.pending.toFixed(1)}
 			/>
 		</div>
 	);

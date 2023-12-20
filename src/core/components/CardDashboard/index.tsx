@@ -7,9 +7,20 @@ interface Props {
 }
 
 export default function CardDashboard({ text, color, length }: Props) {
+	const isTotal = text.includes('Total');
+	const textColor = isTotal ? 'text-black' : color;
+
 	return (
-		<h1 className={`border-solid border-2 border-sky-500 ${color} rounded-lg p-3`}>
-			{text} {length}
-		</h1>
+		<>
+			<div className="flex flex-col gap-2">
+				<h1 className={`text-gray-400 font-semibold`}>{text}</h1>
+				<div>
+					<h1 className={`text-5xl font-semibold ${textColor}`}>
+						{length}
+						{isTotal ? '' : '%'}
+					</h1>
+				</div>
+			</div>
+		</>
 	);
 }
