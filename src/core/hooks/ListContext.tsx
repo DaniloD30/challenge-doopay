@@ -69,10 +69,24 @@ export function ListProvider({ children }: ProviderProps) {
 		}
 	}, [tasks]);
 
+	const handleOrder = useCallback(() => {
+		const newArr = tasks.sort((a, b) => {
+			if (a.isPending && !b.isPending) {
+				return -1;
+			}
+			if (!a.isPending && b.isPending) {
+				return 1;
+			}
+			return 0;
+		});
+		setTasks(newArr);
+	}, [tasks]);
+
 	useEffect(() => {
 		handlePercent();
+		handleOrder();
 		localStorage.setItem('tasks', JSON.stringify(tasks));
-	}, [tasks, handlePercent]);
+	}, [tasks, handlePercent, handleOrder]);
 
 	return (
 		<ListContext.Provider
