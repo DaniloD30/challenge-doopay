@@ -22,6 +22,7 @@ export default function FormTask() {
 					placeholder="Escreva uma nova tarefa"
 					className="border-solid border-2 border-gray-200 rounded-lg p-2 w-96"
 					onChange={e => handleAdd(e.target.value)}
+					maxLength={255}
 				/>
 
 				<button
